@@ -25,7 +25,15 @@ Route.get('/', async ({ view }) => {
 })
 
 Route.get('/signup', async ({ view }) => {
-  return view.render('auth/login')
+  return view.render('auth/signup')
+})
+
+Route.post('/signup', async (ctx) => {
+  const { default: SignUpController } = await import(
+    'App/Controllers/Http/SignUpController'
+  )
+
+  return new SignUpController().index(ctx);
 })
 
 Route.get('/login', async ({ view }) => {

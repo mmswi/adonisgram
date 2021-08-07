@@ -12,9 +12,27 @@
   <main>
     <div>
       <h1 class="title"> Signup page </h1>
-      <p class="subtitle">
-        Congratulations, you have just created your first AdonisJS app.
-      </p>
+      <form action="signup" method="POST">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name">
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email">
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password">
+        </div>
+        <div>
+          <label for="password">Password Confirmation</label>
+          <input type="password" name="password-confirm" id="password-confirm">
+        </div>
+        <div>
+          <input type="submit" value="Create profile">
+        </div>
+      </form>
     </div>
   </main>
 </body>
