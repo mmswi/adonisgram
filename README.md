@@ -4,7 +4,10 @@ To run the project:
 
 To create a db migration:
     node ace make:migration users
-    
+
+To create the table in the db from the migration
+    node ace migration:run
+
 On windows:
 For setting up your mysql
 1. install docker
