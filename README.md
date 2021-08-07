@@ -1,3 +1,10 @@
+To run the project:
+    create your mysql db and .env file(by copying the env-example and changing values)
+    in the terminal: node ace serve --watch
+
+To create a db migration:
+    node ace make:migration users
+    
 On windows:
 For setting up your mysql
 1. install docker
