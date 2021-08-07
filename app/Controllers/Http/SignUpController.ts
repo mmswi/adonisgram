@@ -25,7 +25,9 @@ export default class SignUpController {
         user.name = req.name;
         user.email = req.email;
         user.password = req.password;
-        user.save();
+        
+        await user.save();
+        
         return response.redirect('/');
     }
 }
