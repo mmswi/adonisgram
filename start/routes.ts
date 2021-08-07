@@ -39,3 +39,11 @@ Route.post('/signup', async (ctx) => {
 Route.get('/login', async ({ view }) => {
   return view.render('auth/login')
 })
+
+Route.post('/login', async (ctx) => {
+  const { default: LoginController } = await import(
+    'App/Controllers/Http/LoginController'
+  )
+
+  return new LoginController().index(ctx);
+})

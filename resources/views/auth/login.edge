@@ -12,9 +12,25 @@
   <main>
     <div>
       <h1 class="title"> Login page </h1>
-      <p class="subtitle">
-        Congratulations, you have just created your first AdonisJS app.
-      </p>
+      <form action="login" method="POST">
+        <div>
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email">
+          @if(flashMessages.has('errors.email'))
+            <p>{{ flashMessages.get('errors.email') }} </p>
+          @end
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password">
+          @if(flashMessages.has('errors.password'))
+            <p>{{ flashMessages.get('errors.password') }} </p>
+          @end
+        </div>
+        <div>
+          <input type="submit" value="Login">
+        </div>
+      </form>
     </div>
   </main>
 </body>
