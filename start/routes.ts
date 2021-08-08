@@ -49,5 +49,5 @@ Route.post('/login', async (ctx) => {
 })
 
 Route.get('/profile', async ({ view }) => {
-  return view.render('user/profile')
-})
+  return view.render('user/profile');
+}).middleware('auth');
