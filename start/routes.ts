@@ -47,3 +47,7 @@ Route.post('/login', async (ctx) => {
 
   return new LoginController().index(ctx);
 })
+
+Route.get('/profile', async ({ view }) => {
+  return view.render('user/profile')
+})
