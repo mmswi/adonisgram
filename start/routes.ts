@@ -22,11 +22,11 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async ({ view }) => {
   return view.render('welcome')
-})
+});
 
 Route.get('/signup', async ({ view }) => {
   return view.render('auth/signup')
-})
+});
 
 Route.post('/signup', async (ctx) => {
   const { default: AuthController } = await import(
@@ -34,11 +34,11 @@ Route.post('/signup', async (ctx) => {
   )
 
   return new AuthController().signup(ctx);
-})
+});
 
 Route.get('/login', async ({ view }) => {
   return view.render('auth/login')
-})
+});
 
 Route.post('/login', async (ctx) => {
   const { default: AuthController } = await import(
@@ -46,7 +46,15 @@ Route.post('/login', async (ctx) => {
   )
 
   return new AuthController().login(ctx);
-})
+});
+
+Route.post('/logout', async (ctx) => {
+  const { default: AuthController } = await import(
+    'App/Controllers/Http/AuthController'
+  )
+
+  return new AuthController().logout(ctx);
+});
 
 Route.get('/profile', async ({ view }) => {
   return view.render('user/profile');
