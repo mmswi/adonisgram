@@ -29,11 +29,11 @@ Route.get('/signup', async ({ view }) => {
 })
 
 Route.post('/signup', async (ctx) => {
-  const { default: SignUpController } = await import(
-    'App/Controllers/Http/SignUpController'
+  const { default: AuthController } = await import(
+    'App/Controllers/Http/AuthController'
   )
 
-  return new SignUpController().index(ctx);
+  return new AuthController().signup(ctx);
 })
 
 Route.get('/login', async ({ view }) => {
@@ -41,11 +41,11 @@ Route.get('/login', async ({ view }) => {
 })
 
 Route.post('/login', async (ctx) => {
-  const { default: LoginController } = await import(
-    'App/Controllers/Http/LoginController'
+  const { default: AuthController } = await import(
+    'App/Controllers/Http/AuthController'
   )
 
-  return new LoginController().index(ctx);
+  return new AuthController().login(ctx);
 })
 
 Route.get('/profile', async ({ view }) => {
