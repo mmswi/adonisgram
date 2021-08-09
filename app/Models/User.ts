@@ -18,6 +18,9 @@ export default class User extends BaseModel {
   @column()
   public password: string
 
+  @column.dateTime()
+  public email_verified_at: DateTime;
+
   @beforeSave()
   public static async hashPassword(user: User) {
     if (user.$dirty.password) {
@@ -31,9 +34,12 @@ export default class User extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  public async sendConfirmationEmail() {
+  public async sendConfirmationEmail(session) {
     const token = nanoid();
     const confirmEmailUrl = `${Env.get('APP_URL')}/verify-email/${this.id}/${token}`
+
+    session.put(`token-${this.id}`, token);
+
     Mail.send((message) => {
       message
         .from('confirmemail@adonisgram.com')

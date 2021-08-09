@@ -18,9 +18,11 @@
   </form>
 </div>
 
+@if(auth.user.email_verified_at === null)
 <div>
   <form action="/confirmation-email" method="POST">
     <button type="submit">Resend verification email</button>
   </form>
 </div>
+@endif
 @endsection
