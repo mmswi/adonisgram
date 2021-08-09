@@ -77,4 +77,10 @@ Route.get('/verify-email/:email', async (ctx) => {
 }).as('verifyEmail');
 
 // Important - dynamic route is put last as it will discard the other routes after it
-Route.on(':/username').render('profile').middleware('auth');
+Route.get('/:username', async (ctx) => {
+  const { default: ProfilesController } = await import(
+    'App/Controllers/Http/ProfilesController'
+  )
+
+  return new ProfilesController().index(ctx);
+}).middleware('auth');
