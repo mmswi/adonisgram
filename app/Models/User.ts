@@ -1,6 +1,7 @@
-import { DateTime } from 'luxon'
-import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm'
-import Hash from '@ioc:Adonis/Core/Hash'
+import { DateTime } from 'luxon';
+import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm';
+import Hash from '@ioc:Adonis/Core/Hash';
+import Mail from '@ioc:Adonis/Addons/Mail';
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -27,4 +28,14 @@ export default class User extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  public async sendConfirmationEmail() {
+    Mail.send((message) => {
+      message
+          .from('confirmemail@adonisgram.com')
+          .to(this.email)
+          .subject('Please confirm your email')
+          .htmlView('emails/confirmation', { name: this.name })
+  })
+  }
 }
