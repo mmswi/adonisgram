@@ -37,3 +37,4 @@ For setting up your mysql
 For the mailer, in this example we use the smtp configuration:
     1. The data is from: https://mailtrap.io/ (make a free account)
     2. For SMTP settings/Integrations, use Nodemailer
+    3. The sent emails from the platform to whatever email you want will be received in the mailtrap inbox (https://mailtrap.io/inboxes/)

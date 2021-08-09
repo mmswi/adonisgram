@@ -1,10 +1,11 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import { schema, rules } from '@ioc:Adonis/Core/Validator';
+import Mail from '@ioc:Adonis/Addons/Mail';
 import User from 'App/Models/User';
 
 
 export default class AuthController {
-    public async signup({ request, response }: HttpContextContract) {
+    public async signup({ request, response, auth }: HttpContextContract) {
         const req = await request.validate({
             schema: schema.create({
                 name: schema.string(),
@@ -20,17 +21,25 @@ export default class AuthController {
                 required: 'The {{ field }} is required to create a new account',
             }
         })
-        
+
         const user = new User();
         user.name = req.name;
         user.email = req.email;
         user.password = req.password;
-        
+
         await user.save();
 
         // send verification email
-        
-        
+        await Mail.send((message) => {
+            message
+                .from('confirmemail@adonisgram.com')
+                .to(user.email)
+                .subject('Please confirm your email')
+                .htmlView('emails/confirmation', { name: user.name })
+        })
+
+        await auth.attempt(req.email, req.password);
+
         return response.redirect('/');
     }
 
