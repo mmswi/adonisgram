@@ -3,26 +3,21 @@ import User from 'App/Models/User';
 import { DateTime } from 'luxon';
 
 export default class EmailVerifiesController {
-    public async index({ response, auth, session }: HttpContextContract) {
-        await auth.user?.sendConfirmationEmail(session);
+    public async index({ response, auth }: HttpContextContract) {
+        await auth.user?.sendConfirmationEmail();
 
         return response.redirect().back();
     }
 
-    public async verify({ response, params, session }: HttpContextContract) {
-        const userId = params.userid;
-        const token = params.token;
-        const user = await User.findOrFail(userId);
-        const sessionToken = session.get(`token-${user.id}`);
+    public async verify({ request, params }: HttpContextContract) {
+        if (request.hasValidSignature()) {
+            const user = await User.findByOrFail('email', params.email);
+            user.email_verified_at = DateTime.local();
+            user.save();
 
-        if (sessionToken !== token) {
-            return response.status(403);
+            return 'Your email has been verified! Return to the homepage';
         }
 
-        user.email_verified_at = DateTime.local();
-        user.save();
-        session.forget(`token-${user.id}`);
-        
-        return response.redirect('/profile');
+        return 'Signature is missing or URL was tampered.';
     }
 }

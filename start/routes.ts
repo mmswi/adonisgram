@@ -68,10 +68,10 @@ Route.post('/confirmation-email', async (ctx) => {
   return new EmailVerifyController().index(ctx);
 }).middleware('auth');
 
-Route.get('/verify-email/:userid/:token', async (ctx) => {
+Route.get('/verify-email/:email', async (ctx) => {
   const { default: EmailVerifyController } = await import(
     'App/Controllers/Http/EmailVerifiesController'
   )
 
   return new EmailVerifyController().verify(ctx);
-}).middleware('auth');
+}).as('verifyEmail');

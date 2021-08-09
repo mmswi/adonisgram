@@ -3,7 +3,7 @@ import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm';
 import Hash from '@ioc:Adonis/Core/Hash';
 import Mail from '@ioc:Adonis/Addons/Mail';
 import Env from '@ioc:Adonis/Core/Env';
-import { nanoid } from 'nanoid';
+import Route from '@ioc:Adonis/Core/Route'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -34,12 +34,13 @@ export default class User extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  public async sendConfirmationEmail(session) {
-    const token = nanoid();
-    const confirmEmailUrl = `${Env.get('APP_URL')}/verify-email/${this.id}/${token}`
-
-    session.put(`token-${this.id}`, token);
-
+  public async sendConfirmationEmail() {
+    // signed url solves the opening of the new link in an incognito browser
+    const confirmEmailUrl = Env.get('APP_URL') + Route.makeSignedUrl('verifyEmail', { 
+      params: { email: this.email },
+      expiresIn: '30m'
+    });
+    
     Mail.send((message) => {
       message
         .from('confirmemail@adonisgram.com')

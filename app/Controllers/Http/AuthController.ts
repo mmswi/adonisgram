@@ -4,7 +4,7 @@ import User from 'App/Models/User';
 
 
 export default class AuthController {
-    public async signup({ request, response, auth, session }: HttpContextContract) {
+    public async signup({ request, response, auth }: HttpContextContract) {
         const req = await request.validate({
             schema: schema.create({
                 name: schema.string(),
@@ -29,7 +29,7 @@ export default class AuthController {
         await user.save();
 
         // send verification email
-        await auth.user?.sendConfirmationEmail(session);
+        await auth.user?.sendConfirmationEmail();
 
         await auth.attempt(req.email, req.password);
 
