@@ -13,7 +13,16 @@ export default class User extends BaseModel {
   public name: string
 
   @column()
+  public username: string
+
+  @column()
   public email: string
+
+  @column()
+  public avatar: string
+
+  @column()
+  public details: string
 
   @column()
   public password: string
@@ -40,7 +49,7 @@ export default class User extends BaseModel {
       params: { email: this.email },
       expiresIn: '30m'
     });
-    
+
     Mail.send((message) => {
       message
         .from('confirmemail@adonisgram.com')

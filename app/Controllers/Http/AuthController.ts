@@ -8,6 +8,7 @@ export default class AuthController {
         const req = await request.validate({
             schema: schema.create({
                 name: schema.string(),
+                username: schema.string(),
                 email: schema.string({}, [
                     rules.email(),
                 ]),
@@ -23,15 +24,16 @@ export default class AuthController {
 
         const user = new User();
         user.name = req.name;
+        user.username = req.username;
         user.email = req.email;
         user.password = req.password;
 
         await user.save();
 
+        await auth.attempt(req.email, req.password);
+
         // send verification email
         await auth.user?.sendConfirmationEmail();
-
-        await auth.attempt(req.email, req.password);
 
         return response.redirect('/');
     }

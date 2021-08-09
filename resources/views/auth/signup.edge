@@ -12,6 +12,13 @@
       @end
     </div>
     <div>
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username">
+      @if(flashMessages.has('errors.username'))
+        <p>{{ flashMessages.get('errors.username') }} </p>
+      @end
+    </div>
+    <div>
       <label for="email">Email</label>
       <input type="email" name="email" id="email">
       @if(flashMessages.has('errors.email'))
