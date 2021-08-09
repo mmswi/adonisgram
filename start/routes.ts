@@ -59,3 +59,11 @@ Route.post('/logout', async (ctx) => {
 Route.get('/profile', async ({ view }) => {
   return view.render('user/profile');
 }).middleware('auth');
+
+Route.post('/confirmation-email', async (ctx) => {
+  const { default: EmailVerifyController } = await import(
+    'App/Controllers/Http/EmailVerifiesController'
+  )
+
+  return new EmailVerifyController().index(ctx);
+}).middleware('auth');
