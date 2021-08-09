@@ -1,48 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdonisJS - A fully featured web framework for Node.js</title>
-  @entryPointStyles('app')
-  @entryPointScripts('app')
-</head>
-<body>
+@layout('layouts/app')
 
-  <main>
+@section('content')
+<div>
+  <h1 class="title"> Signup page </h1>
+  <form action="signup" method="POST">
     <div>
-      <h1 class="title"> Signup page </h1>
-      <form action="signup" method="POST">
-        <div>
-          <label for="name">Name</label>
-          <input type="text" name="name" id="name">
-          @if(flashMessages.has('errors.name'))
-            <p>{{ flashMessages.get('errors.name') }} </p>
-          @end
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email">
-          @if(flashMessages.has('errors.email'))
-            <p>{{ flashMessages.get('errors.email') }} </p>
-          @end
-        </div>
-        <div>
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password">
-          @if(flashMessages.has('errors.password'))
-            <p>{{ flashMessages.get('errors.password') }} </p>
-          @end
-        </div>
-        <div>
-          <label for="password">Password Confirmation</label>
-          <input type="password" name="password_confirm" id="password-confirm">
-        </div>
-        <div>
-          <input type="submit" value="Create profile">
-        </div>
-      </form>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name">
+      @if(flashMessages.has('errors.name'))
+        <p>{{ flashMessages.get('errors.name') }} </p>
+      @end
     </div>
-  </main>
-</body>
-</html>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email">
+      @if(flashMessages.has('errors.email'))
+        <p>{{ flashMessages.get('errors.email') }} </p>
+      @end
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password">
+      @if(flashMessages.has('errors.password'))
+        <p>{{ flashMessages.get('errors.password') }} </p>
+      @end
+    </div>
+    <div>
+      <label for="password">Password Confirmation</label>
+      <input type="password" name="password_confirm" id="password-confirm">
+    </div>
+    <div>
+      <input type="submit" value="Create profile">
+    </div>
+  </form>
+</div>
+@endsection
