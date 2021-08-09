@@ -27,6 +27,9 @@ export default class AuthController {
         user.password = req.password;
         
         await user.save();
+
+        // send verification email
+        
         
         return response.redirect('/');
     }

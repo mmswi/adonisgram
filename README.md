@@ -32,3 +32,8 @@ For setting up your mysql
         - install the latest mysql mysql:latest
 
 3. add these values in .env file
+
+
+For the mailer, in this example we use the smtp configuration:
+    1. The data is from: https://mailtrap.io/ (make a free account)
+    2. For SMTP settings/Integrations, use Nodemailer
