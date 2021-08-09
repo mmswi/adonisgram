@@ -26,7 +26,7 @@ Route.get('/', async ({ view }) => {
 
 Route.get('/signup', async ({ view }) => {
   return view.render('auth/signup')
-});
+}).middleware('guest');
 
 Route.post('/signup', async (ctx) => {
   const { default: AuthController } = await import(
@@ -38,7 +38,7 @@ Route.post('/signup', async (ctx) => {
 
 Route.get('/login', async ({ view }) => {
   return view.render('auth/login')
-});
+}).middleware('guest');
 
 Route.post('/login', async (ctx) => {
   const { default: AuthController } = await import(
