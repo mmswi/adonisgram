@@ -7,8 +7,10 @@ export default class ProfilesController {
     public async index({ view, params }: HttpContextContract) {
         const username = params.username
         try {
-            await User.findByOrFail('username', username);
-            return view.render('user/profile')
+            const user = await User.findByOrFail('username', username);
+            await user.load('posts')
+
+            return view.render('user/profile', { user })
         } catch (e) {
             return view.render('errors/not-found')
         }

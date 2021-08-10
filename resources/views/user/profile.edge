@@ -8,12 +8,12 @@
     {{ auth.isAuthenticated }}
   </p>
   <p>
-    Your name is: {{auth.user.name}}
-    <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="{{auth.user.avatar}}" alt="">
+    Your name is: {{user.name}}
+    <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="{{user.avatar}}" alt="">
 
   </p>
   <p>
-    {{auth.user.details}}
+    {{user.details}}
   </p>
   <a href="/accounts/edit">Edit Profile</a>
 </div>
@@ -26,6 +26,12 @@
   <form action="/logout" method="POST">
     <button type="submit">Sign out</button>
   </form>
+</div>
+
+<div>
+  @each(post in user.posts)
+  <img class="rounded-full ring-2 ring-white" src="{{post.image}}" alt="" style="width: 300px">
+  @endeach
 </div>
 
 @if(auth.user.email_verified_at === null)

@@ -40,7 +40,7 @@ export default class PostsController {
 
     post.image = `/uploads/${imageName}`;
     post.caption = req.caption;
-    post.user_id = user.id;
+    post.userId = user.id;
     
     await post.save();
 

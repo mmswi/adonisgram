@@ -1,9 +1,10 @@
 import { DateTime } from 'luxon';
-import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, beforeSave, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm';
 import Hash from '@ioc:Adonis/Core/Hash';
 import Mail from '@ioc:Adonis/Addons/Mail';
 import Env from '@ioc:Adonis/Core/Env';
-import Route from '@ioc:Adonis/Core/Route'
+import Route from '@ioc:Adonis/Core/Route';
+import Post from './Post';
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -42,6 +43,9 @@ export default class User extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => Post)
+  public posts: HasMany<typeof Post>
 
   public async sendConfirmationEmail() {
     // signed url solves the opening of the new link in an incognito browser
