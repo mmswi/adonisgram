@@ -10,6 +10,9 @@ export default class ProfilesController {
         } catch (e) {
             return view.render('errors/not-found')
         }
-        
+    }
+
+    public async edit({ view }: HttpContextContract) {
+        return view.render('user/edit')        
     }
 }
