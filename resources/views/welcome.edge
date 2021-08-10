@@ -4,7 +4,7 @@
   <h1 class="title"> You're on the homepage </h1>
   @if(auth.isAuthenticated)
    <p class="subtitle">You are logged in, {{ auth.user.name }}</p>
-   <p>Check your <a href="/profile">profile</a></p>
+   <p>Check your <a href='/{{auth.user.username}}'>profile</a></p>
   @else
     <a href="/login">Login</a> or <a href="/signup">Sign up</a>
   @endif
