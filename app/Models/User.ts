@@ -5,6 +5,7 @@ import Mail from '@ioc:Adonis/Addons/Mail';
 import Env from '@ioc:Adonis/Core/Env';
 import Route from '@ioc:Adonis/Core/Route';
 import Post from './Post';
+import Following from './Following';
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -46,6 +47,9 @@ export default class User extends BaseModel {
 
   @hasMany(() => Post)
   public posts: HasMany<typeof Post>
+
+  @hasMany(() => Following)
+  public following: HasMany<typeof Following>
 
   public async sendConfirmationEmail() {
     // signed url solves the opening of the new link in an incognito browser

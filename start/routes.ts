@@ -112,6 +112,22 @@ Route.post('/posts/create', async (ctx) => {
   return new PostsController().store(ctx);
 }).middleware('auth');
 
+Route.post('/follow/:userId', async (ctx) => {
+  const { default: FollowsController } = await import(
+    'App/Controllers/Http/FollowsController'
+  )
+
+  return new FollowsController().store(ctx);
+});
+
+Route.delete('/follow/:userId', async (ctx) => {
+  const { default: FollowsController } = await import(
+    'App/Controllers/Http/FollowsController'
+  )
+
+  return new FollowsController().destroy(ctx);
+});
+
 // Important - dynamic route is put last as it will discard the other routes after it
 Route.get('/:username', async (ctx) => {
   const { default: ProfilesController } = await import(

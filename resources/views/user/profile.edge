@@ -8,15 +8,24 @@
     {{ auth.isAuthenticated }}
   </p>
   <p>
-    Your name is: {{user.name}}
+    {{user.name}}
     <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="{{user.avatar}}" alt="">
-
   </p>
   <p>
     {{user.details}}
   </p>
   @if(auth.user.id === user.id)
     <a href="/accounts/edit">Edit Profile</a>
+  @else
+    @if(isAuthUserFollowingCurrentUser)
+      <form action="/follow/{{user.id}}?_method=delete" method="POST">
+        <button type="submit">Unfollow</button>      
+      </form>
+    @else
+      <form action="/follow/{{user.id}}" method="POST">
+        <button type="submit">Follow</button>
+      </form>
+    @endif
   @endif
 </div>
 

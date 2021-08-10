@@ -1,14 +1,13 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Posts extends BaseSchema {
-  protected tableName = 'posts'
+export default class Followings extends BaseSchema {
+  protected tableName = 'followings'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('image')
-      table.text('caption')
       table.integer('user_id')
+      table.integer('following_id')
 
       table.timestamps()
     })
