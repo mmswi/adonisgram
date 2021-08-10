@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import User from 'App/Models/User';
 import Application from '@ioc:Adonis/Core/Application'
+// import { UserFactory } from 'Database/factories';
 
 
 export default class ProfilesController {
@@ -8,6 +9,9 @@ export default class ProfilesController {
         const username = params.username
         try {
             const user = await User.findByOrFail('username', username);
+            // TODO - uncomment below to ceate mock users in db
+            // await UserFactory.with('posts', 5).createMany(10);
+
             await user.load('posts')
 
             return view.render('user/profile', { user })

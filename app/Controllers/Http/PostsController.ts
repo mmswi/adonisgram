@@ -1,6 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Application from '@ioc:Adonis/Core/Application'
-import { schema, rules } from '@ioc:Adonis/Core/Validator';
+import { schema } from '@ioc:Adonis/Core/Validator';
 import Post from 'App/Models/Post';
 
 export default class PostsController {
