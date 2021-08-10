@@ -5,7 +5,13 @@
   <h1 class="title">Create a new post </h1>
   <form action="/posts/create" method="POST" enctype="multipart/form-data">
     <input type="file" name="picture" id="post-picture">
+    @if(flashMessages.has('errors.picture'))
+      <p>{{ flashMessages.get('errors.picture') }} </p>
+    @end
     <textarea type="text" name="caption" id="caption" placeholder="Caption"></textarea>
+    @if(flashMessages.has('errors.caption'))
+      <p>{{ flashMessages.get('errors.caption') }} </p>
+    @end
     <button type="submit">Create</button>
   </form>
 </div>

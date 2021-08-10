@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Application from '@ioc:Adonis/Core/Application'
+import { schema, rules } from '@ioc:Adonis/Core/Validator';
 import Post from 'App/Models/Post';
 
 export default class PostsController {
@@ -15,12 +16,21 @@ export default class PostsController {
     if (!user) {
       return 'User not found';
     }
-    
 
-    const picture = request.file('picture');
-    if (!picture) { 
-      return 'Please upload a photo';
-    }
+    const req = await request.validate({
+      schema: schema.create({
+        caption: schema.string({}),
+        picture: schema.file({
+          size: '2mb',
+          extnames: ['jpg', 'png', 'jpeg', '']
+        })
+      }),
+      messages: {
+        required: 'The {{ field }} is required to create a new post',
+      }
+    })
+
+    const picture = req.picture;
     const imageName = `${new Date().getTime()}.${picture.extname}`;
     await picture.move(Application.publicPath('uploads'), {
       name: imageName
@@ -29,7 +39,7 @@ export default class PostsController {
     const post = new Post();
 
     post.image = `/uploads/${imageName}`;
-    post.caption = request.input('caption');
+    post.caption = req.caption;
     post.user_id = user.id;
     
     await post.save();
