@@ -15,20 +15,30 @@ export default class ProfilesController {
     }
 
     public async edit({ view }: HttpContextContract) {
-        return view.render('user/edit')        
+        return view.render('user/edit')
     }
 
-    public async update({ auth, request }: HttpContextContract) {
+    public async update({ auth, request, response }: HttpContextContract) {
         const user = auth.user;
+        if (!user) {
+            return 'User not found';
+        }
+
         const avatar = request.file('avatar');
-        
+
         if (!avatar) {
             return 'Please upload a file'
         }
 
-        // puts avatar in temp file, before actually saving to db
-        await avatar.move(Application.tmpPath('uploads'))
+        const imageName = `${new Date().getTime()}.${avatar.extname}`;
+        await avatar.move(Application.publicPath('uploads'), {
+            name: imageName
+        })
 
-        // user.details = request.only['details'];
+        user.details = request.only['details'];
+        user.avatar = `/uploads/${imageName}`;
+        user.save();
+
+        return response.redirect(`/${user.username}`);
     }
 }
