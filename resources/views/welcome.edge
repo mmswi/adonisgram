@@ -8,7 +8,12 @@
 
    @each(post in posts)
     <img src="{{post.image}}" alt="">
-    <p>{{post.caption}}</p>
+    <p> <a href="/{{post.user.username}}"><img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="{{post.user.avatar}}" alt=""> {{post.user.username}}</a></p>
+    <div>
+      <p>
+        <span class="font-semibold">{{post.user.username}}</span> {{post.caption}} <span class="text-gray-500">{{post.createdAt.toFormat('DD')}}</span>
+      </p>
+    </div>
    @endeach
   @else
     <a href="/login">Login</a> or <a href="/signup">Sign up</a>
