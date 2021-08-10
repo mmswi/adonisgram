@@ -9,8 +9,7 @@ export default class FollowsController {
         }
 
         const userIdToFollow = params.userId;
-        console.log('following ', userIdToFollow)
-        const follow = new Following;
+        const follow = new Following;        
         
         follow.userId = authUser.id;
         follow.followingId = userIdToFollow;

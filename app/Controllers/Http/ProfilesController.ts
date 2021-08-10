@@ -14,10 +14,14 @@ export default class ProfilesController {
 
             await user.load('posts')
             await auth?.user?.load('following')
+            await user.load('following')
+
             const authUserFollowedIds = auth?.user?.following.map(following => following.followingId);
             const isAuthUserFollowingCurrentUser = authUserFollowedIds?.includes(user.id)
+            const followersCount = await user.getFollowersCount();
+            const followingCount = user.following?.length || 0;
 
-            return view.render('user/profile', { user, isAuthUserFollowingCurrentUser })
+            return view.render('user/profile', { user, isAuthUserFollowingCurrentUser, followersCount, followingCount })
         } catch (e) {
             return view.render('errors/not-found')
         }

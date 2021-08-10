@@ -8,9 +8,11 @@
     {{ auth.isAuthenticated }}
   </p>
   <p>
-    {{user.name}}
     <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="{{user.avatar}}" alt="">
+    {{user.name}}
   </p>
+  <p>Followers: {{followersCount}}</p>
+  <p>Following: {{followingCount}}</p>
   <p>
     {{user.details}}
   </p>

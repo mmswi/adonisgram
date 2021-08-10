@@ -51,6 +51,11 @@ export default class User extends BaseModel {
   @hasMany(() => Following)
   public following: HasMany<typeof Following>
 
+  public async getFollowersCount() {
+    const followers = await Following.query().where('following_id', this.id)
+    return followers?.length || 0;
+  }
+
   public async sendConfirmationEmail() {
     // signed url solves the opening of the new link in an incognito browser
     const confirmEmailUrl = Env.get('APP_URL') + Route.makeSignedUrl('verifyEmail', { 
