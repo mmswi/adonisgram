@@ -15,11 +15,15 @@
   <p>
     {{user.details}}
   </p>
-  <a href="/accounts/edit">Edit Profile</a>
+  @if(auth.user.id === user.id)
+    <a href="/accounts/edit">Edit Profile</a>
+  @endif
 </div>
 
 <div>
-  <a href="/posts/create">Add new post</a>
+  @if(auth.user.id === user.id)
+    <a href="/posts/create">Add new post</a>
+  @endif
 </div>
 
 <div>
