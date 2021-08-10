@@ -31,10 +31,10 @@ a {
 main {
   max-width: 620px;
   margin: auto;
-  height: 100vh;
   padding: 0 30px;
   align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
