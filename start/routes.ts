@@ -20,8 +20,12 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async ({ view }) => {
-  return view.render('welcome')
+Route.get('/', async (ctx) => {
+  const { default: HomeController } = await import(
+    'App/Controllers/Http/HomeController'
+  )
+
+  return new HomeController().index(ctx);
 });
 
 Route.get('/signup', async ({ view }) => {

@@ -5,6 +5,11 @@
   @if(auth.isAuthenticated)
    <p class="subtitle">You are logged in, {{ auth.user.name }}</p>
    <p>Check your <a href='/{{auth.user.username}}'>profile</a></p>
+
+   @each(post in posts)
+    <img src="{{post.image}}" alt="">
+    <p>{{post.caption}}</p>
+   @endeach
   @else
     <a href="/login">Login</a> or <a href="/signup">Sign up</a>
   @endif
