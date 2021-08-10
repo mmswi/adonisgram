@@ -8,7 +8,7 @@ export default class Users extends BaseSchema {
       table.increments('id')
       table.string('name')
       table.string('email').index()
-      table.string('userName', 25).index()
+      table.string('username', 25).index()
       table.string('avatar').nullable()
       table.text('details').nullable()
       table.dateTime('email_verified_at').nullable()
