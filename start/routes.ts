@@ -84,6 +84,14 @@ Route.get('/accounts/edit', async (ctx) => {
   return new ProfilesController().edit(ctx);
 }).middleware('auth');
 
+Route.post('/accounts/edit', async (ctx) => {
+  const { default: ProfilesController } = await import(
+    'App/Controllers/Http/ProfilesController'
+  )
+
+  return new ProfilesController().update(ctx);
+}).middleware('auth');
+
 // Important - dynamic route is put last as it will discard the other routes after it
 Route.get('/:username', async (ctx) => {
   const { default: ProfilesController } = await import(
