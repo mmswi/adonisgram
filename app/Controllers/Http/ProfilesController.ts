@@ -26,18 +26,16 @@ export default class ProfilesController {
 
         const avatar = request.file('avatar');
 
-        if (!avatar) {
-            return 'Please upload a file'
+        if (avatar) {
+            const imageName = `${new Date().getTime()}.${avatar.extname}`;
+            await avatar.move(Application.publicPath('uploads'), {
+                name: imageName
+            })
+            user.avatar = `/uploads/${imageName}`;
         }
 
-        const imageName = `${new Date().getTime()}.${avatar.extname}`;
-        await avatar.move(Application.publicPath('uploads'), {
-            name: imageName
-        })
-
-        user.details = request.only['details'];
-        user.avatar = `/uploads/${imageName}`;
-        user.save();
+        user.details = request.input('details');
+        await user.save();
 
         return response.redirect(`/${user.username}`);
     }

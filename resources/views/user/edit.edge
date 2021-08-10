@@ -4,7 +4,7 @@
 <div>
   <h1 class="title"> Update your profile </h1>
   <form action="/accounts/edit" method="POST" enctype="multipart/form-data">
-    <textarea type="text" name="details" id="details" placeholder="Your Bio Comes Here"></textarea>
+    <textarea type="text" name="details" id="details" placeholder="Your Bio Comes Here">{{auth.user.details}}</textarea>
     <input type="file" name="avatar" id="avatar">
     <button type="submit">Update</button>
   </form>

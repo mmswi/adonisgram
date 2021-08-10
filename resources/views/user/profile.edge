@@ -9,9 +9,11 @@
   </p>
   <p>
     Your name is: {{auth.user.name}}
-    {{auth.user.avatar}}
     <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="{{auth.user.avatar}}" alt="">
 
+  </p>
+  <p>
+    {{auth.user.details}}
   </p>
   <a href="/accounts/edit">Edit Profile</a>
 </div>
