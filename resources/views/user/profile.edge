@@ -44,8 +44,9 @@
 </div>
 
 <div>
-  @each(post in user.posts)
+  @each(post in userPostsDesc)
   <img class="rounded-full ring-2 ring-white" src="{{post.image}}" alt="" style="width: 300px">
+  {{post.caption}}
   @endeach
 </div>
 
