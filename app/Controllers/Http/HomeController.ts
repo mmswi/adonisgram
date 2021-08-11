@@ -8,7 +8,7 @@ export default class HomeController {
         const followingIds = auth.user?.following.map(followed => followed.followingId);
         console.log('followingIds: ', followingIds)
         const folowedUsersIds = followingIds || [];
-        const posts = await Post.query().whereIn('userId', folowedUsersIds).preload('user');
+        const posts = await Post.query().whereIn('userId', folowedUsersIds).preload('user').orderBy('created_at', 'desc');
 
         return view.render('welcome', { posts });
     }
