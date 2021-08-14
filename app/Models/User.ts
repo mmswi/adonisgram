@@ -30,10 +30,10 @@ export default class User extends BaseModel {
   public password: string
 
   @column()
-  public accessToken: string
+  public access_token: string
 
   @column.dateTime()
-  public email_verified_at: DateTime;
+  public email_verified_at: DateTime | null;
 
   @beforeSave()
   public static async hashPassword(user: User) {
