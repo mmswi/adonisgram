@@ -29,6 +29,9 @@ export default class User extends BaseModel {
   @column()
   public password: string
 
+  @column()
+  public accessToken: string
+
   @column.dateTime()
   public email_verified_at: DateTime;
 
