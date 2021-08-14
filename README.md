@@ -1,3 +1,5 @@
+Shout out to Bitfumes for this tutorial: https://www.youtube.com/watch?v=VNwhqiu_oRk&ab_channel=Bitfumes
+
 To run the project:
     - create your mysql db and .env file(by copying the env-example and changing values);
     
@@ -45,4 +47,5 @@ For the mailer, in this example we use the smtp configuration:
    1. For SMTP settings/Integrations, use Nodemailer
    1. The sent emails from the platform to whatever email you want will be received in the mailtrap inbox (https://mailtrap.io/inboxes/)
 
-Shout out to Bitfumes for this tutorial: https://www.youtube.com/watch?v=VNwhqiu_oRk&ab_channel=Bitfumes
+
+For Social authentication, create a google client id and client secret; Use this tutorial: https://developers.google.com/identity/sign-in/web/sign-in
