@@ -42,28 +42,36 @@ export default class GoogleController {
         return response.redirect('/');
     }
 
-    private async getSocialDetails(socialAlly: any): Promise<{ email: string; token: any; name: string; avatarUrl: string; isEmailVerified: boolean | null; }> {
+    private async getSocialDetails(socialAlly: any): Promise<{ email: string; token: any; name: string; username: string; avatarUrl: string; isEmailVerified: boolean | null; }> {
         const user = await socialAlly.user()
 
         return {
             email: user.email,
             token: user.token,
             name: user.name,
+            username: this.createUserName(user.id, user.nickName),
             avatarUrl: user.avatarUrl,
             isEmailVerified: user.emailVerificationState === 'verified'
         }
     }
 
-    private async getUserOrCreate(userDetails: { email: string; token: any; name: string; avatarUrl: string; isEmailVerified: boolean | null; }): Promise<any> {
+    private async getUserOrCreate(userDetails: { email: string; token: any; name: string; username: string; avatarUrl: string; isEmailVerified: boolean | null; }): Promise<any> {
         const user = await User.firstOrCreate({
             email: userDetails.email,
         }, {
             access_token: userDetails.token.token,
             name: userDetails.name,
+            username: userDetails.username,
             avatar: userDetails.avatarUrl,
             email_verified_at: userDetails.isEmailVerified ? DateTime.local() : null
         })
 
         return user;
+    }
+
+    private createUserName(id: string, nickName: string): string {
+        const newId = id?.substr(0,4) + id?.substr(id?.length - 4);
+        const newNickName = nickName?.replace(' ', '');
+        return `${newNickName}_${newId}`
     }
 }
