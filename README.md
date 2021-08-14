@@ -44,3 +44,5 @@ For the mailer, in this example we use the smtp configuration:
    1. The data is from: https://mailtrap.io/ (make a free account)
    1. For SMTP settings/Integrations, use Nodemailer
    1. The sent emails from the platform to whatever email you want will be received in the mailtrap inbox (https://mailtrap.io/inboxes/)
+
+Shout out to Bitfumes for this tutorial: https://www.youtube.com/watch?v=VNwhqiu_oRk&ab_channel=Bitfumes
