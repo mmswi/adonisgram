@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User';
+import { DateTime } from 'luxon';
 
 export default class GoogleController {
     public async redirect({ ally }: HttpContextContract) {
@@ -35,25 +36,31 @@ export default class GoogleController {
          */
         const userSocialDetails = await this.getSocialDetails(google)
         const user = await this.getUserOrCreate(userSocialDetails);
-        
+
         return user;
     }
 
-    private async getSocialDetails(socialAlly: any) {
+    private async getSocialDetails(socialAlly: any): Promise<{ email: string; token: any; name: string; avatarUrl: string; isEmailVerified: boolean | null; }> {
         const user = await socialAlly.user()
 
         return {
             email: user.email,
             token: user.token,
+            name: user.name,
+            avatarUrl: user.avatarUrl,
+            isEmailVerified: user.emailVerificationState === 'verified'
         }
     }
 
-    private async getUserOrCreate(userDetails: {email: string, token: any}) {
-        const user = await User.findBy('email', userDetails.email);
-
-        if (!user) {
-            // TODO: create user
-        }
+    private async getUserOrCreate(userDetails: { email: string; token: any; name: string; avatarUrl: string; isEmailVerified: boolean | null; }): Promise<any> {
+        const user = await User.firstOrCreate({
+            email: userDetails.email,
+        }, {
+            access_token: userDetails.token.token,
+            name: userDetails.name,
+            avatar: userDetails.avatarUrl,
+            email_verified_at: userDetails.isEmailVerified ? DateTime.local() : null
+        })
 
         return user;
     }
