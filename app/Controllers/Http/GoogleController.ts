@@ -7,7 +7,7 @@ export default class GoogleController {
         await ally.use('google').redirect();
     }
 
-    public async callback({ ally }: HttpContextContract) {
+    public async callback({ ally, auth, response }: HttpContextContract) {
         const google = ally.use('google')
 
         /**
@@ -37,7 +37,9 @@ export default class GoogleController {
         const userSocialDetails = await this.getSocialDetails(google)
         const user = await this.getUserOrCreate(userSocialDetails);
 
-        return user;
+        await auth.login(user);
+
+        return response.redirect('/');
     }
 
     private async getSocialDetails(socialAlly: any): Promise<{ email: string; token: any; name: string; avatarUrl: string; isEmailVerified: boolean | null; }> {
