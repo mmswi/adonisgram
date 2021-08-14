@@ -40,6 +40,22 @@ Route.post('/signup', async (ctx) => {
   return new AuthController().signup(ctx);
 });
 
+Route.get('/google/redirect', async (ctx) => {
+  const { default: GoogleController } = await import(
+    'App/Controllers/Http/GoogleController'
+  )
+
+  return new GoogleController().redirect(ctx);
+}).middleware('guest');
+
+Route.get('/google/callback', async (ctx) => {
+  const { default: GoogleController } = await import(
+    'App/Controllers/Http/GoogleController'
+  )
+
+  return new GoogleController().callback(ctx);
+}).middleware('guest');
+
 Route.get('/login', async ({ view }) => {
   return view.render('auth/login')
 }).middleware('guest');
