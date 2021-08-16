@@ -39,7 +39,7 @@ export default class GoogleController {
 
         await auth.login(user);
 
-        return response.redirect('/');
+        return response.redirect('/social-success-redirect');
     }
 
     private async getSocialDetails(socialAlly: any): Promise<{ email: string; token: any; name: string; username: string; avatarUrl: string; isEmailVerified: boolean | null; }> {

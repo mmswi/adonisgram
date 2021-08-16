@@ -1,20 +1,24 @@
-import '../css/app.css'
+import '../css/app.css';
 const socialLoginBtn = document.getElementById('social-login');
+const loginErrorElement = document.getElementById('social-login-error');
+const socialLoginStorageKey = 'socialLogin';
+
 if (socialLoginBtn) {
     socialLoginBtn.addEventListener('click', socialLogin)
 }
 
-window.socialLogin = socialLogin
-
 async function socialLogin(event) {
     event.preventDefault();
+    clearSocialLoginError();
 
     const response = await socialLoginPromise();
-    if (response.success) {
-        return window.location.href('/');
+
+    if (!response?.success) {
+        return showSocialLoginError();
     }
 
-    console.log('Social authentication did not work!')
+    window.location.href = '/';
+    clearLocalStorageKey(socialLoginStorageKey);
 }
 
 function socialLoginPromise() {
@@ -39,11 +43,8 @@ function openPopupWindow(url, promiseResolver) {
 }
 
 function handleWindowClose(promiseResolver) {
-    console.log('window got closed ');
-    const storageStatus = getLocalStorageObject('socialLogin')
-    promiseResolver({
-        success: storageStatus.success
-    });
+    const storageStatus = getLocalStorageObject(socialLoginStorageKey)
+    promiseResolver(storageStatus);
 }
 
 function getLocalStorageObject(objectKey) {
@@ -51,7 +52,14 @@ function getLocalStorageObject(objectKey) {
     return JSON.parse(storedObjectString);
 }
 
-function setLocalStorageObject(objectKey, objectValue) {
-    const stringObject = JSON.stringify(objectValue);
-    localStorage.setItem(objectKey, objectValue);
+function clearLocalStorageKey(key) {
+    window.localStorage.removeItem(key);
+}
+
+function showSocialLoginError() {
+    loginErrorElement.innerHTML = 'There was a problem with the login, please try again';
+}
+
+function clearSocialLoginError() {
+    loginErrorElement.innerHTML = '';
 }

@@ -48,6 +48,10 @@ Route.get('/google/redirect', async (ctx) => {
   return new GoogleController().redirect(ctx);
 }).middleware('guest');
 
+Route.get('/social-success-redirect', async ({ view }) => {
+  return view.render('auth/social-success-redirect')
+})
+
 Route.get('/google/callback', async (ctx) => {
   const { default: GoogleController } = await import(
     'App/Controllers/Http/GoogleController'
