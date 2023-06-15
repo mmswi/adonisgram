@@ -1,4 +1,4 @@
-root: ./APP
+root: ./app
 structure:
   readme: README.md
   summary: README.md
