@@ -1,8 +1,4 @@
----
-title: Yolaaaa
-createdAt: 2025-09-25T10:41:45.265Z
-updatedAt: 2025-10-30T07:30:11.796Z
----
+# Yolaaaa
 
 this is a test file
 
@@ -12,13 +8,10 @@ this is a test file
 
 aici am niste texte
 
-<table isTableHeaderOn="true" selectedColumns="" selectedRows="" columnWidths="329,515,219.82828282828285,145.17171717171715">
+<table isTableHeaderOn="true" columnWidths="329,515,219,145">
   <tr>
     <td>
       <p>hoooo</p>
-      <ol>
-      <li></li>
-      </ol>
     </td>
     <td>
       <p>ddeada</p>
@@ -34,20 +27,23 @@ aici am niste texte
     <td colSpan="2" rowSpan="1">
       <p>aaaaa</p>
     </td>
-    <td>
+    <td lightBackgroundColor="#EC4899" colSpan="1" rowSpan="3">
     </td>
     <td lightBackgroundColor="#F97316">
     </td>
   </tr>
   <tr>
     <td>
+      <p>yooo</p>
     </td>
     <td lightBackgroundColor="#2166AE">
     </td>
-    <td>
-    </td>
-    <td lightBackgroundColor="#EF4444" colSpan="1" rowSpan="2">
+    <td lightBackgroundColor="#EF4444" colSpan="1" rowSpan="3">
       <p>aaaa</p>
+    </td>
+  </tr>
+  <tr>
+    <td lightBackgroundColor="#F97316" colSpan="2" rowSpan="1">
     </td>
   </tr>
   <tr>
@@ -62,7 +58,6 @@ aici am niste texte
     </td>
   </tr>
 </table>
-
 
 <table isTableHeaderOn="true" columnWidths="220,220,221">
   <tr>
@@ -91,7 +86,7 @@ aici am niste texte
     </td>
   </tr>
   <tr>
-    <td align="left" lightBackgroundColor="#22C55E">
+    <td lightBackgroundColor="#22C55E" align="left">
       <p>fdda</p>
     </td>
     <td align="right">
@@ -99,5 +94,4 @@ aici am niste texte
     </td>
   </tr>
 </table>
-
 
