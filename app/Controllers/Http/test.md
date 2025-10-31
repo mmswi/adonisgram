@@ -63,3 +63,41 @@ aici am niste texte
   </tr>
 </table>
 
+
+<table isTableHeaderOn="true" columnWidths="220,220,221">
+  <tr>
+    <td align="center">
+      <p>da</p>
+    </td>
+    <td align="left">
+    </td>
+    <td align="right">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colSpan="1" rowSpan="3">
+      <p>dadad mij</p>
+    </td>
+    <td align="left">
+      <p>left</p>
+    </td>
+    <td align="right">
+      <p>right</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="left" colSpan="2" rowSpan="1">
+      <p>fa</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="left" lightBackgroundColor="#22C55E">
+      <p>fdda</p>
+    </td>
+    <td align="right">
+      <p>fd</p>
+    </td>
+  </tr>
+</table>
+
+
